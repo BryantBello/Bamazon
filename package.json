@@ -1,0 +1,28 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "MySql node app like amazon shopping list, but better!",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BryantBello/Bamazon.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "database",
+    "mysql"
+  ],
+  "author": "Bryant Bello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BryantBello/Bamazon/issues"
+  },
+  "homepage": "https://github.com/BryantBello/Bamazon#readme",
+  "dependencies": {
+    "mysql": "^2.10.2"
+  }
+}
