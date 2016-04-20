@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/BryantBello/Bamazon#readme",
   "dependencies": {
-    "mysql": "^2.10.2"
+    "mysql": "^2.10.2",
+    "prompt": "^1.0.0"
   }
 }
