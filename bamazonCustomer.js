@@ -23,14 +23,16 @@ prompt.start();
 
 //First Display All of the Items available for sale. This initial display, should include the ids, names, and prices of products for sale
 
-con.query("SELECT * FROM bamazon WHERE itemID= <= 1000" , function(err, rows) {
+con.query("SELECT itemID, ProductName, DepartmentName, Price, Quantity FROM bamazon WHERE itemID >= 1000" , function(err, res) {
         if (err) {
-            return callback(err);
+            return (err);
         }
+        console.log(res);
+    });
 
 
 //Users should then be prompted with two messages. The first message should ask them the ID of the product they would like to buy. The second message should ask them how many of the product they would like to buy.
- prompt.get()
+ //prompt.get();
 
 
 //Check if your store has enough quantity of the product to meet the customer's request. If not, you should respond to the user by saying: "Insufficient quantity" and prevent the order from going through.
