@@ -4,8 +4,7 @@ var prompt = require('prompt');
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'stalker
-',
+    password: 'stalker',
     database: 'bamazon'
 });
 
