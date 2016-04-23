@@ -69,7 +69,7 @@ var productMenu = function() {
                 if (result.Add_More == 'Yes') {
                     productMenu();
                 } else {
-                    console.log('Thank you! Your order is complete');
+                    console.log('Thank you! Your order is complete. Have a wonderful day!!');
                     process.exit();
                 };
             });
