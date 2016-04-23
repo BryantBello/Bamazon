@@ -2,42 +2,79 @@ var mysql = require('mysql');
 var prompt = require('prompt');
 
 var con = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: 'stalker',
-	database: 'bamazon'
+    host: 'localhost',
+    user: 'root',
+    password: 'stalker',
+    database: 'bamazon'
 });
 
 
-con.connect(function(err){
-	if (err){
-		console.log(err);
-	}
-		console.log('connected');
+//CONNECT TO MYSQL DATABASE
+
+con.connect(function(err) {
+    if (err) {
+        console.log(err);
+    }
+    console.log('Connection Complete');
 });
 
 
-prompt.start();
 
 
 
-//First Display All of the Items available for sale. This initial display, should include the ids, names, and prices of products for sale
 
-con.query("SELECT itemID, ProductName, DepartmentName, Price, Quantity FROM bamazon WHERE itemID >= 1000" , function(err, res) {
+var productMenu = function() {
+
+    con.query("select * from products", function(err, products) {
         if (err) {
-            return (err);
-        }
-        console.log(res);
+            return err;
+        };
+
+        for (var i = 0; i < products.length; i++) {
+            console.log('Item ID: ' + products[i].ItemID + ' --' + ' Department: ' + products[i].DepartmentName + ' --' + ' Product: ' + products[i].ProductName + ' --' + ' Price: $' + products[i].Price);
+            console.log('----------------------------------------------------------------------------');
+        };
+        //PROMPT USER TO GET ITEMS
+        prompt.get(['ItemID', 'Quantity', 'Add_More (Yes or No)'], function(err, result) {
+
+            console.log('ProductID: ' + result.ItemID);
+            console.log('Quantity: ' + result.Quantity);
+
+            for (var i = 0; i < products.length; i++) {
+                if (result.ItemID == products[i].ItemID) {
+                    if (products[i].StockQuantity < result.Quantity) {
+                        console.log('Sorry, we are currently out of ' + ProductName + ' please choose another product!');
+                    }
+
+                    var orderTotal = (result.Quantity * products[i].Price);
+                    var newStockQuantity = (products[i].StockQuantity - result.Quantity);
+
+                    if (products[i].StockQuantity >= result.Quantity) {
+                        console.log('Order total: $' + orderTotal)
+                    };
+                };
+
+
+            };
+            //UPDATA THE DATABASE
+            con.query("UPDATE products SET StockQuantity =" + newStockQuantity + " WHERE ItemID = " + result.ItemID + ";", function(err, products) {
+                if (err) {
+                    return console.log(err);
+                }
+                if (result.Add_More == 'Yes') {
+                    productMenu();
+                } else {
+                    console.log('Thank you! Your order is complete');
+                    process.exit();
+                };
+            });
+
+
+
+        });
+
     });
+}
 
-
-//Users should then be prompted with two messages. The first message should ask them the ID of the product they would like to buy. The second message should ask them how many of the product they would like to buy.
- //prompt.get();
-
-
-//Check if your store has enough quantity of the product to meet the customer's request. If not, you should respond to the user by saying: "Insufficient quantity" and prevent the order from going through.
-
-
-
-
-//If your store DOES have enough of the product to meet the customer's request, you should fulfill their order. This means that you should show them the total cost of their puchase. Then update the SQL database to reflect the remaining quantity.
+console.log('Thank you for choosing to shop with Bamazon!!! Please choose a product from the products displayed:  ');
+productMenu();
