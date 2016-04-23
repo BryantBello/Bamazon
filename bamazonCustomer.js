@@ -22,7 +22,7 @@ con.connect(function(err) {
 
 
 
-
+//Display items and prompt user to select from list
 
 var productMenu = function() {
 
@@ -38,18 +38,23 @@ var productMenu = function() {
         //PROMPT USER TO GET ITEMS
         prompt.get(['ItemID', 'Quantity', 'Add_More (Yes or No)'], function(err, result) {
 
+        	//Show what the user has picked and how many
             console.log('ProductID: ' + result.ItemID);
             console.log('Quantity: ' + result.Quantity);
 
+            //Loop through all of the products to see if product is in stock
+            //Confirm that the item is in stock
             for (var i = 0; i < products.length; i++) {
                 if (result.ItemID == products[i].ItemID) {
                     if (products[i].StockQuantity < result.Quantity) {
                         console.log('Sorry, we are currently out of ' + ProductName + ' please choose another product!');
                     }
 
+                    //Get the total for the products selected	
                     var orderTotal = (result.Quantity * products[i].Price);
                     var newStockQuantity = (products[i].StockQuantity - result.Quantity);
 
+                    //if item is in stock give the user their total
                     if (products[i].StockQuantity >= result.Quantity) {
                         console.log('Order total: $' + orderTotal)
                     };
