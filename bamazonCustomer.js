@@ -4,7 +4,7 @@ var prompt = require('prompt');
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'stalker',
+    password: '***', //password hidden for upload to git
     database: 'bamazon'
 });
 
@@ -37,7 +37,7 @@ var productMenu = function() {
         //PROMPT USER TO GET ITEMS
         prompt.get(['ItemID', 'Quantity', 'Add_More (Yes or No)'], function(err, result) {
 
-        	//Show what the user has picked and how many
+            //Show what the user has picked and how many
             console.log('ProductID: ' + result.ItemID);
             console.log('Quantity: ' + result.Quantity);
 
