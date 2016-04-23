@@ -4,7 +4,8 @@ var prompt = require('prompt');
 var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'stalker',
+    password: 'stalker
+',
     database: 'bamazon'
 });
 
@@ -15,7 +16,7 @@ con.connect(function(err) {
     if (err) {
         console.log(err);
     }
-    console.log('Connection Complete');
+    console.log('Connection to database is complete');
 });
 
 
