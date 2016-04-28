@@ -61,7 +61,7 @@ var productMenu = function() {
 
 
             };
-            //UPDATA THE DATABASE
+            //UPDATE THE DATABASE
             con.query("UPDATE products SET StockQuantity =" + newStockQuantity + " WHERE ItemID = " + result.ItemID + ";", function(err, products) {
                 if (err) {
                     return console.log(err);
